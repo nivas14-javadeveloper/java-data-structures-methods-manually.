@@ -34,8 +34,11 @@ class queuearraylist
     }
     public void poll()
     {
-        System.out.println("removed element="+a[position-1]);
-        a[position-1]=null;
+        System.out.println("removed element="+a[0]);
+        for(int i=0;i<position;i++)
+        {
+            a[i]=a[i+1];
+        }
         position--;
     }
     public void size()
