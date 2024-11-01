@@ -1,0 +1,91 @@
+class Node 
+{
+    Object ele;
+    Node next;
+    public Node(Object ele)
+    {
+        this.ele=ele;
+        this.next=null;
+    }
+}
+class stacklinkedlist 
+{
+    Node head;
+    Node tail;
+    public void add(Object value)
+    {
+        if(head==null && tail==null)
+        {
+            head=tail=new Node(value);
+            return;
+        }
+        tail=head;
+        while(tail.next!=null)
+        {
+            tail=tail.next;
+        }
+        tail.next=new Node(value);
+    }
+    public void display()
+    {
+        Node temp=head;
+        
+        while(temp!=null)
+        {
+            System.out.print(temp.ele+" -> ");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public void size()
+    {
+        int count=0;
+        Node temp=head;
+        while(temp!=null)
+        {
+            count++;
+        temp=temp.next;
+        }
+        System.out.println("size of stack= "+count);
+    }
+    public Object peek()
+    {
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        return temp.ele;
+    }
+    public void push()
+    {
+        if(head==null)System.out.println("empty stack");
+        Node temp=head;
+        while(temp.next!=tail)
+        {
+            temp=temp.next;
+        }
+        temp=tail;
+        tail.next=null;
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        stacklinkedlist s=new stacklinkedlist();
+        s.add(10);
+        s.add(20);
+        s.add(30);
+        s.add(40);
+        System.out.println("-----------------------------elements in stack-------------------------------");
+        s.display();
+        s.size();
+        System.out.println("latest element= "+s.peek());
+        System.out.println("-----------------------------elements in stack after using push method-----------------------------");
+        s.push();
+        s.display();
+        s.size();
+         System.out.println("latest element= "+s.peek());
+    }
+}
