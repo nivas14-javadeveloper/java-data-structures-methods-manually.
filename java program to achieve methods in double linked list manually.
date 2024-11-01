@@ -1,0 +1,114 @@
+class Node 
+{
+    Object ele;
+    Node next;
+    Node prev;
+    public Node(Object ele,Node prev,Node next)
+    {
+        this.ele=ele;
+        this.prev=prev;
+        this.next=next;
+    }
+}
+class doublelinkedlist 
+{
+    Node head;
+    public void add(Object value)
+    {
+        if(head==null)
+        {
+            head=new Node(value,null,null);
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=new Node(value,temp,null);
+    }
+    public void display()
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.ele+" -> ");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public int size()
+    {
+        Node temp=head;
+        int count=0;
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+    public void reverse()
+    {
+        Node temp=head;
+        Node prev=null;
+        Node next=null;
+        while(temp!=null)
+        {
+            next=temp.next;
+            temp.next=prev;
+            temp.prev=next;
+            prev=temp;
+            temp=next;
+        }
+        head=prev;
+    }
+    public void remove(int index)
+    {
+        if(index<0 || index>size())throw new NullPointerException();
+        Node temp=head;
+        if(index==0)
+        {
+            temp=temp.next;
+            temp.prev=null;
+            return;
+        }
+        for(int i=1;i<index;i++)
+        {
+            temp=temp.next;
+        }
+        temp.next=temp.next.next;
+        temp.prev=temp.next;
+    }
+    public void get(int index)
+    {
+        Node temp=head;
+        for(int i=0;i<index;i++)
+        {
+            temp=temp.next;
+        }
+        System.out.println("element at index "+index+" = "+temp.ele);
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        doublelinkedlist d=new doublelinkedlist();
+        d.add(10);
+        d.add(20);
+        d.add(30);
+        d.add(40);
+        System.out.println("----------------------------elements in doublelinkedlist-------------------------");
+        d.display();
+        System.out.println("size of doublelinkedlist= "+d.size());
+        d.reverse();
+        System.out.println("----------------------------after using reverse method---------------------------");
+        d.display();
+        System.out.println("----------------------------elements in doublelinkedlist after using remove method-------------------------");
+        d.remove(1);
+         System.out.println("size of doublelinkedlist= "+d.size());
+        d.display();
+        d.get(2);
+    }
+}
