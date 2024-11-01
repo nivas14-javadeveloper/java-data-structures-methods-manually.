@@ -1,0 +1,69 @@
+class stackarraylist 
+{
+    Object []a;
+    int position=0;
+    public stackarraylist()
+    {
+        a=new Object[10];
+    }
+    public void add(Object value)
+    {
+        if(position>=a.length)increase();
+        a[position++]=value;
+    }
+    public void increase()
+    {
+        Object temp[]=new Object[a.length*2];
+        for(int i=0;i<position;i++)
+        {
+            temp[i]=a[i];
+        }
+        a=temp;
+    }
+    public void display()
+    {
+        for(int i=position-1;i>=0;i--)
+        {
+            System.out.print(a[i]+" -> ");
+        }
+        System.out.println("null");
+    }
+    public Object peek()
+    {
+        return a[0];
+    }
+    public void push()
+    {
+        System.out.println("removed element="+a[position-1]);
+        a[position-1]=null;
+        position--;
+    }
+    public void size()
+    {
+        int count=0;
+        for(int i=0;i<position;i++)
+        {
+            count++;
+        }
+        System.out.println("size of stack= "+count);
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        stackarraylist s=new stackarraylist();
+        s.add(10);
+        s.add(20);
+        s.add(30);
+        s.add(40);
+        System.out.println("-----------------------------------elements in stack----------------------------------");
+        s.display();
+        System.out.println("first element= "+s.peek());
+        s.size();
+        System.out.println("----------------------------elements in stack after using push method-----------------------------");
+        s.push();
+        s.display();
+        s.size();
+    }
+}
