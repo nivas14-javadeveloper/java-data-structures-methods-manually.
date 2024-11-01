@@ -1,0 +1,81 @@
+class Node 
+{
+    Object ele;
+    Node next;
+    public Node(Object ele)
+    {
+        this.ele=ele;
+        this.next=null;
+    }
+}
+class queuelinkedlist
+{
+    Node head;
+    public void add(Object value)
+    {
+        if(head==null)
+        {
+            head=new Node(value);
+            return;
+        }
+         Node temp=head;
+         while(temp.next!=null)
+         {
+             temp=temp.next;
+         }
+         temp.next=new Node(value);
+    }
+    public void display()
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.ele+" -> ");
+            temp=temp.next;
+        }
+        System.out.println("null");
+    }
+    public Object peek()
+    {
+        return head.ele;
+    }
+    public void size()
+    {
+        int count=0;
+        Node temp=head;
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        System.out.println("size of queue= "+count);
+    }
+    public void poll()
+    {
+        Node temp=head;
+        while(temp.next.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=null;
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        queuelinkedlist q=new queuelinkedlist();
+        q.add(10);
+        q.add(20);
+        q.add(30);
+        q.add(40);
+        System.out.println("------------------------elements in queue-----------------------------");
+        q.display();
+        System.out.println("first element in queue= "+q.peek());
+        q.size();
+        System.out.println("------------------------elements in queue after using poll method-----------------------------");
+        q.poll();
+        q.display();
+        q.size();
+    }
+}
