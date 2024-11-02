@@ -1,0 +1,105 @@
+class Node 
+{
+    int ele;
+    Node left;
+    Node right;
+    public Node(int ele)
+    {
+        this.ele=ele;
+        this.left=null;
+        this.right=null;
+    }
+}
+class binarysearchtree
+{
+    Node head;
+    public void add(int value)
+    {
+        if(head==null)
+        {
+            head=new Node(value);
+            return;
+        }
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(value<temp.ele)
+            {
+                if(temp.left==null)
+                {
+                    temp.left=new Node(value);
+                    break;
+                }
+                temp=temp.left;
+            }
+            else if(value>temp.ele)
+            {
+                if(temp.right==null)
+                {
+                temp.right=new Node(value);
+                break;
+                }
+                temp=temp.right;
+            }
+            else return;
+        }
+    }
+    public void display(Node temp)
+    {
+        if(temp!=null)
+        {
+            display(temp.left);
+            System.out.println(temp.ele);
+            display(temp.right);
+        }
+    }
+    public int peek()
+    {
+        return head.ele;
+    }
+    public void isEmpty()
+    {
+        if(head==null)
+        {
+            System.out.println("tree is empty!");
+        }
+        else System.out.println("tree consists of elements");
+    }
+    public void search(int value)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(value==temp.ele)
+            {
+                System.out.println(value+" is available in tree.");
+                return;
+            }
+            else if(value<temp.ele)
+            {
+                temp=temp.left;
+            }
+            else 
+            {
+                temp=temp.right;
+            }
+        }
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        binarysearchtree b=new binarysearchtree();
+        b.add(3);
+        b.add(5);
+        b.add(8);
+        b.add(10);
+        b.add(8);
+        System.out.println("---------------------elements in tree------------------------------");
+        b.display(b.head);
+        System.out.println("top element in tree= "+b.peek());
+        b.isEmpty();
+        b.search(8);
+    }
+}
