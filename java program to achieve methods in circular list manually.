@@ -1,0 +1,96 @@
+class Node 
+{
+    Object ele;
+    Node next;
+    public  Node(Object ele)
+    {
+        this.ele=ele;
+        this.next=null;
+    }
+}
+class circularlist 
+{
+    Node head;
+    Node tail;
+    public void add(Object value)
+    {
+        Node n=new Node(value);
+        if(head==null)
+        {
+            head=tail=n;
+            return;
+        }
+        else 
+        {
+            tail.next=n;
+            tail=n;
+            tail.next=head;
+        }
+    }
+    public void display()
+    {
+        Node temp=head.next;
+        System.out.print(head.ele+" -> ");
+        while(temp!=head)
+        {
+            System.out.print(temp.ele+" -> ");
+            temp=temp.next;
+        }
+        System.out.println("back to head");
+    }
+    public int size()
+    {
+        int count=1;
+        Node temp=head.next;
+        while(temp!=head)
+        {
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+    public void remove(int index)
+    {
+        if(index<0 || index>=size())throw new IndexOutOfBoundsException();
+        if(index==0)
+        {
+            head=head.next;
+            tail.next=head;
+            return;
+        }
+        else 
+        {
+            Node temp=head;
+            for(int i=1;i<index;i++)
+            {
+                temp=temp.next;
+            }
+            if(index!=0 && index!=(size()-1))
+            {
+                temp.next=temp.next.next;
+            }
+            else if(index==(size()-1))
+            {
+                temp.next=head;
+            }
+        }
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        circularlist c=new circularlist();
+        c.add(10);
+        c.add(20);
+        c.add(30);
+        c.add(40);
+        System.out.println("---------------------------elements in circular list--------------------------");
+        c.display();
+       System.out.println("size of circular list= "+c.size());
+        System.out.println("----------------------------elements in circular list after using remove method----------------------------------------");
+       c.remove(3);
+        c.display();
+       System.out.println("size of circular list= "+c.size());
+    }
+}
