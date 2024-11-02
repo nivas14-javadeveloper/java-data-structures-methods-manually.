@@ -1,0 +1,82 @@
+class Node 
+{
+    int ele;
+    Node next;
+    public Node(int ele)
+    {
+        this.ele=ele;
+        this.next=next;
+    }
+}
+class Hashsetlinkedlist 
+{
+    Node bucket[]=new Node[10];
+    public void add(int value)
+    {
+        int index=value%10;
+        if(bucket[index]==null)
+        {
+            bucket[index]=new Node(value);
+            return;
+        }
+        else{
+        for(int i=index;i<bucket.length;i++)
+        {
+            if(bucket[i]==null)
+            {
+                bucket[i]=new Node(value);
+                break;
+            }
+        }
+        }
+    }
+    public void display()
+    {
+        for(int i=0;i<bucket.length;i++)
+        {
+            if(bucket[i]!=null)
+            {
+            if(bucket[i].ele!=0)
+            {
+                System.out.print(bucket[i].ele+" -> ");
+            }
+            }
+        }
+        System.out.println("null");
+    }
+    public boolean contains(int value)
+    {
+        for(int i=0;i<bucket.length;i++)
+        {
+            if(bucket[i]!=null)
+            {
+            if(bucket[i].ele==value)return true;
+            }
+        }
+        return false;
+    }
+    public void remove(int index)
+    {
+        System.out.println("removed element in Hashset= "+bucket[index].ele);
+        bucket[index]=null;
+    }
+}
+public class Main 
+{
+    public static void main(String[]args)
+    {
+        Hashsetlinkedlist h=new Hashsetlinkedlist();
+        h.add(10);
+        h.add(20);
+        h.add(30);
+        h.add(40);
+        h.add(41);
+        h.add(51);
+        System.out.println("---------------------------elements in Hashset-----------------------------");
+        h.display();
+        System.out.println(h.contains(40));
+        System.out.println("---------------------------elements in hashset aftter using remove method---------------------");
+        h.remove(4);
+        h.display();
+    }
+}
